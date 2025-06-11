@@ -1,0 +1,36 @@
+
+### Steps to Reproduce:
+1. Clone the Snap and install dependencies.
+2. Observe `axios@0.27.2` in the `package-lock.json`.
+3. Trigger a Snap call that relies on user input for URL/path.
+4. Insert payload like `http://localhost:8000/internal-api` in Snap request.
+5. Monitor outbound traffic (Burp, tcpdump) to confirm SSRF hit.
+
+---
+
+## 📸 Screenshots / Videos
+- Screenshot of Axios version in the lockfile
+- Snap request triggering SSRF
+- Request logs from Burp Suite
+
+---
+
+## 🛠️ Tools Used
+- Burp Suite (for interception)
+- `npm ls axios` (to map dependency tree)
+- Custom script to trace Axios usage
+- Dependency Graphing via `npm-graph`
+
+---
+
+## 🧱 Remediation Advice
+- Upgrade Axios to the latest secure version (`>=1.2.0`)
+- Sanitize all Snap user inputs before processing requests
+- Consider Snap-level URL validation as an additional control
+
+---
+
+## 🧾 References
+- [Axios Vulnerability Advisory](https://github.com/axios/axios/pull/4410)
+- [CVE-2022-28168: Axios SSRF](https://nvd.nist.gov/vuln/detail/CVE-2022-28168)
+- [MetaMask Snap Docs](https://docs.metamask.io/snaps/)
